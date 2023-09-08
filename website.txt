@@ -1,0 +1,20 @@
+1.dashboard
+login->applicant,employee,admin
+register->applicant
+
+
+applicant :
+ first name 
+ last name
+
+ bucket_name :quantumairesumes
+
+ get all employees
+ post new employee
+ get employee by id
+ create new employee
+ create new role add count
+ get all roles'
+ post job
+ get applicantions
+ 

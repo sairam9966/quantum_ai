@@ -1,0 +1,156 @@
+roles
+1.admin
+2.applicant
+3.employee
+
+
+APPLICANT
+//authentication for applicant(id , firstname ,lastname,email,password,resume_url,experience,education,skills,phone,jobroles)
+Registration
+2. email
+3. password
+4.confirm password
+
+
+Application form
+1.first name
+2.last name
+3.resume
+4.add experience -> job position, job role, start date-end date,description.
+5.add education  -> level of education,field of study, aggregate,start and end dates.
+6.skills 
+7.phone number
+8.job roles
+
+
+EMPLOYEE 
+employee(id,name,email,password,start date,end date,status,current_location,age,contact,bank_name,acc_no,ifsc_code,basic_salary,hra,conveniene_alloances,medical_alloances,special_alloances,epf,health_insurance,proffesional_tax,tds,level);
+
+role(id,name,employee_ids(array))
+
+project(manager,lead,name,budget,budget_remaining,status,start_date,due_date);
+
+tasks(id ,project_id ,employee_id,task_name,task_description,due_date,status);
+
+
+ADMIN 
+admin(employee_id)
+
+
+jobs(id,role,division,locations,type_of_position,job_description,skills_and_experience,roles_and_responsibilites,additional_info,reviewedby,approvedby,post_date,expire_date);
+
+resignation_request(id,employee_id,letter,signature,status)
+
+
+
+
+CREATE TABLE jobs (
+    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    role_name VARCHAR(255),
+    division_id INTEGER REFERENCES divisions(id),
+    locations VARCHAR(255),
+    position_type VARCHAR(100),
+    job_description TEXT,
+    required_skills TEXT,
+    responsibilities TEXT,
+    additional_info TEXT,
+    reviewed_by VARCHAR(100),
+    approved_by VARCHAR(100),
+    posting_date DATE,
+    expiration_date DATE
+);
+ALTER TABLE jobs
+ADD CONSTRAINT unique_job_role_division_date UNIQUE (role_name, division_id, posting_date);
+
+
+
+CREATE TABLE admins (
+    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    employee_id UUID ,
+    FOREIGN KEY (employee_id) REFERENCES employees(id)
+);
+
+CREATE TABLE tasks (
+    id SERIAL PRIMARY KEY,
+    project_id INT,
+    employee_id UUID,
+    task_name VARCHAR(255),
+    task_description TEXT,
+    due_date DATE,
+    status VARCHAR(50),
+    FOREIGN KEY (project_id) REFERENCES projects(id),
+    FOREIGN KEY (employee_id) REFERENCES employees(id)
+);
+
+CREATE TABLE projects (
+    id SERIAL PRIMARY KEY,
+    manager_id UUID REFERENCES employees(id),
+    team_lead_id UUID REFERENCES employees(id),
+    project_name VARCHAR(255) NOT NULL,
+    budget NUMERIC(12, 2),
+    budget_remaining NUMERIC(12, 2),
+    status VARCHAR(20),
+    start_date DATE,
+    due_date DATE
+);
+
+CREATE TABLE roles (
+    id SERIAL PRIMARY KEY,
+    role_name VARCHAR(255) NOT NULL,
+    employee_ids INTEGER[]
+);
+CREATE TABLE employees (
+    id UUID PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    start_date DATE,
+    end_date DATE,
+    status VARCHAR(20),
+    current_location VARCHAR(255),
+    age INTEGER,
+    contact VARCHAR(20),
+    bank_name VARCHAR(255),
+    acc_no VARCHAR(30),
+    ifsc_code VARCHAR(15),
+    basic_salary NUMERIC(12, 2),
+    hra NUMERIC(12, 2),
+    conveniene_alloances NUMERIC(12, 2),
+    medical_alloances NUMERIC(12, 2),
+    special_alloances NUMERIC(12, 2),
+    epf NUMERIC(12, 2),
+    health_insurance NUMERIC(12, 2),
+    proffesional_tax NUMERIC(12, 2),
+    tds NUMERIC(12, 2),
+    level VARCHAR(20)
+);
+
+
+CREATE TABLE applicants (
+    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    job_id UUID ,
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    email VARCHAR(255),
+    password VARCHAR(255),
+    resume_url VARCHAR(255),
+    cover_letter TEXT,
+    phone_number VARCHAR(20),
+    
+);
+
+resignation table
+CREATE TABLE resignation (
+    id SERIAL PRIMARY KEY,
+    letter TEXT,
+    phone_number VARCHAR(20),
+    employee_id UUID REFERENCES employees(id)
+);
+
+
+
+
+
+
+
+
