@@ -1,0 +1,67 @@
+.careersTopContainer{
+    background-image: url("https://images.unsplash.com/photo-1549692520-acc6669e2f0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80");
+    width: 100vw;
+    height: 40vh;
+    object-fit: cover;
+}
+.careersNavBar{
+    height: 30%;
+    color: white;
+    font-weight: 600;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 1rem;
+
+}
+.careersNavList{
+    list-style-type: none;
+    display: flex;
+    gap: 1.5rem;
+    padding-right: 5rem;
+    align-items: center;
+
+}
+
+.careersNavItem{
+    background-color: #215776;
+    padding: .5rem;
+    border-radius: .5rem;
+}
+
+.careersSearchContainer{
+    padding-left: 2rem;
+}
+.careersSearchContainer{
+    color: black;
+    width: 70%;
+    padding: 1rem;
+    border-radius: .5rem;
+}
+
+.welcomeCareerHead{
+    color: white;
+    font-size: 2rem;
+    font-weight: 800;
+}
+.careersSearchInnerContainer{
+    width: 60%;
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+
+}
+.searchBtn{
+    color: white;
+    background-color: #215776;
+    padding: 1rem;
+    border-radius: .5rem;
+    margin-left: .5rem;
+}
+
+.careersjobCardsContainer{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+}

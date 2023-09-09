@@ -1,0 +1,35 @@
+.card{
+    width: 15vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    margin-top: 50px;
+    border-radius: 10px;
+    box-shadow:8px 8px 20px rgba(0,0,0,0.4);
+}
+
+.cardImg{
+    width: 100px;
+    height: 100px;
+    margin-top: -50%;
+    border-radius: 50%;
+    /* box-shadow:4px 4px 15px rgba(0,0,0,0.55); */
+
+    /* filter: drop-shadow(6px 6px 5px rgba(0,0,0,0.5)); */
+}
+
+.infoButton{
+    background-color: #76214ABF;
+    padding: .5rem;
+    border-radius: 5px;
+    color: white;
+    margin-bottom: 1rem;
+    width: 5vw;
+    box-shadow:4px 4px 15px rgba(0,0,0,0.55);
+
+}
+.name{
+    width: 5vw;
+    padding: 10px;
+}

@@ -1,0 +1,16 @@
+.homeMainContainer{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+.navbarMainContainer{
+    flex: 1;
+    background-color: #215776;
+}
+
+.contentContainer{
+    flex: 4;
+    background-color: white;
+    overflow-x: hidden;
+}
