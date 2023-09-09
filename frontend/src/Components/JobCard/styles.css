@@ -1,0 +1,62 @@
+
+.jobCard{
+    width: 16vw;
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 1px solid lightgray;
+    box-shadow: 10px 10px 10px rgba(0,0,0,0.5);
+    margin: 1.5rem;
+}
+.jobTitle{
+    font-size: medium;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+#candidates{
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+
+}
+.jobPeople{
+    width: 80%;
+    background-color: #CBC0C0;
+    display: flex;
+    align-self: center;
+    border-radius: 1rem;
+    text-align: center;
+    padding: 1rem;
+
+}
+.jobPeopleInnerDiv{
+    width: 50%;
+}
+
+
+.jobCardinnerHeadsNum{
+    color: #76214A;
+}
+.postjobDiv{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+
+}
+
+.jobPostApps{
+    color: #215776;
+    /* background-color: #215776; */
+    padding: 0.4rem;
+    border-radius: 0.5rem;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: underline;
+}
+.postjob{
+    color: #3A8846;
+    font-weight: 600;
+    font-size: 14px;
+
+}
+

@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+*{
+    border: 0;
+    outline: 0;
+}
+.bgimage{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-image:url("../../Assets/loginbg.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+
+}
+.mainContainer{
+    color: white;
+}
+.header{
+    height: 13vh;
+    width: 100vw;
+    background-color:transparent;
+}
+.innerContainer{
+    width: 100vw;
+    height: 87vh;
+    display: flex;
+
+}
+.companyHead{
+    flex: 1;
+    padding: 40px;  
+
+}
+.loginContainer{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.headTitle{
+    font-size: 5rem;
+    font-family: "Poppins";
+    font-weight:900 ;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(to bottom right,white, black 105%);
+
+}
+.headContent{
+    font-size: 3rem;
+    font-family: "Poppins";
+    font-weight: 500;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(to bottom right,rgba(255, 255, 255,1), rgba(0, 0, 0,0) 70%);
+
+}
+
+.loginForm{
+    background-color: rgba(92, 92, 92,0.5);
+    height: 90%;
+    width: 60%;
+    border-radius: 1rem;
+    backdrop-filter: blur( 2px );
+-webkit-backdrop-filter: blur( 3px );
+box-shadow: inset 15px 15px 10px  rgba(0, 0, 0, 0.37);
+
+}
+
+.formHead{
+    font-size: 1.5rem;
+    font-family: "Poppins";
+    font-weight: 700;
+    text-align: center;
+    padding: 2rem;
+}
+
+.formInput{
+    padding-left: 3rem;
+    font-size: 1rem;
+    font-family: "Poppins";
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.credentials{
+    padding-left: 3rem;
+    font-size: 0.75rem;
+    font-family: "Poppins";
+    font-weight: 600;
+    margin-top: 2rem ;
+}
+
+.loginInpts{
+    width: 90%;
+    margin: 10px 0;
+    border-radius: 5px;
+    padding: 15px 18px;
+    box-sizing: border-box;
+    background-color: #a3a3a3;
+    color: black;
+    font-family: "Poppins";
+    
+  }
+  .loginInpts::placeholder{
+    color: #3e3e3e;
+  }
+  .loginInpts:active{
+    border: 0;
+    outline: 0;
+  }
+  
+
+  .submitBtn{
+    width: 90%;
+    padding:0.7rem;
+    background-color: black;
+    color: white;
+    border: 0;
+    border-radius: 10px;
+    font-family: "Poppins";
+    font-weight: 800;
+    font-size: 1rem;
+  }
+  .radioLabel{
+    margin-left: 1rem;
+  }

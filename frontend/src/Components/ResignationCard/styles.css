@@ -1,0 +1,52 @@
+.resignationContainer{
+    background-color: #f1f1f1;
+    width: 15vw;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 10px 10px 10px rgba(0,0,0,0.5);
+    margin: 1rem;
+    height: 30vh;
+}
+
+.resignationTxtContainer{
+    width: 100%;
+    display: flex;
+}
+.resignationTxtHead{
+    min-width: 50%;
+}
+.resignationTxtContent{
+    min-width: 50%;
+    height: 50px;
+    overflow: hidden;
+    margin-left: .2rem;
+}
+.acceptRejectContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.acceptBtn{
+    background-color: rgb(0, 97, 0);
+    padding:.7rem;
+    border-radius: 1.2rem;
+    color: white;
+    font-weight: 500;
+    box-shadow: 10px 10px 15px rgba(0,0,0,0.5);
+    font-size: .9rem;
+    width: 35%;
+    text-align: center;
+
+}
+.rejectBtn{
+    background-color: rgb(139, 0, 0);
+    padding:.7rem;
+    border-radius: 1.2rem;
+    color: white;
+    font-weight: 500;
+    box-shadow: 10px 10px 15px rgba(0,0,0,0.5);
+    font-size: .9rem;
+    width: 35%;
+    text-align: center;
+
+}
