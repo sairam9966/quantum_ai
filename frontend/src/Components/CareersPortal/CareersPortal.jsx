@@ -1,8 +1,20 @@
-import React from 'react'
+import React ,{useState,useEffect}from 'react'
 import "./styles.css"
 import CareersJobCard from '../CareersJobCard/CareersJobCard'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios';
 
 export default function CareersPortal() {
+    const [jobs,setJobs] = useState([])
+    useEffect(()=>{
+        const getJobs = ()=>{
+          axios.get(`http://localhost:5000/api/jobs`).then((res)=>{
+            console.log(res.data)
+            setJobs(res.data)
+          })
+        }
+        getJobs();
+      },[])
   return (
     <div style={{overflowX:"hidden"}}>
         <div className='careersTopContainer'>
@@ -22,6 +34,7 @@ export default function CareersPortal() {
             </div>
         </div>
         <div className='careersjobCardsContainer'>
+            {/* <CareersJobCard/>
             <CareersJobCard/>
             <CareersJobCard/>
             <CareersJobCard/>
@@ -29,9 +42,15 @@ export default function CareersPortal() {
             <CareersJobCard/>
             <CareersJobCard/>
             <CareersJobCard/>
-            <CareersJobCard/>
-            <CareersJobCard/>
+            <CareersJobCard/> */}
+            {
+          jobs?.map((job)=>{
+            return(
+              <CareersJobCard  key={job.id} job={job}/>
+            )
 
+          })
+        }
         </div>
     </div>
   )

@@ -1,0 +1,157 @@
+.formbg{
+    width: 100vw;
+    height: 100vh;
+    background-color: #215776;
+    position: fixed;
+}
+
+
+.EmpForm{
+    width: 94vw;
+    height: 90vh;
+    background-color: #fff;
+    margin-top: 5vh;
+    margin-left: 3vw;
+    border-radius: 8px;
+    box-shadow: 5px 5px 5px inset rgba(0, 0, 0, 0.5);
+    display: flex;
+}
+
+/* .imgupload{
+    display: inline-block;
+    background-color: #D3D3D3;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    cursor: pointer;
+} */
+
+
+.empDetails{
+    width:37vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputfield{
+    background-color: #D3D3D3;
+    margin-left: 1rem;
+    width: 70%;
+    height: 80%;
+    border-radius: 5px;
+    padding: 0 .7rem;
+}
+
+.inputfield3{
+    background-color: #D3D3D3;
+    margin-left: 1rem;
+    width: 50%;
+    height: 80%;
+    border-radius: 5px;
+    padding-left: 1rem;
+}
+
+.inputLabels{
+    font-weight: 600;
+    margin: 0.4rem;
+    width: 30%;
+    margin-left: 0;
+}
+
+.form2{
+    width: 70vw;
+}
+
+.salarystructure{
+    margin:10%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.bankDetails{
+    margin-left: 10%;
+    width: 80%;
+    text-align: center;
+    margin-top: -10%;
+    display: flex;
+    justify-content: center;
+    border: 1px solid black;
+    border-bottom: 0;
+}
+
+.bids{
+    margin: .5rem;
+}
+
+.inpt{
+    display: flex;
+    width: 90%;
+    align-items: center;
+}
+
+.tableclass{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.earnDed{
+    display: flex;
+    text-align: center;
+}
+
+.tableclass li{
+    width: 60%;
+    text-align: left;
+
+}
+
+
+.earnings{
+    width: 40%;
+    margin-left: 10%;
+}
+
+.deductions{
+    width: 40%;
+}
+
+.inputfield2{
+    background-color: #D3D3D3;
+    width: 30%;
+    height: 1.2rem;
+    padding-left:0.5rem;
+    border-radius: 5px;
+}
+
+.earnitems{
+    line-height: 2rem;
+    border: 1px solid black;
+    border-top: 0;
+}
+
+.deditems{
+    line-height: 2rem;
+    border: 1px solid black;
+    border-top: 0;
+    border-left: 0;
+}
+
+.total{
+    display: flex;
+    height: 2rem;
+}
+
+.inwords{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    border-top: 0;
+    width: 80%;
+    margin-left: 10%;
+    height: 2rem;
+}

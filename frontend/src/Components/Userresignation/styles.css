@@ -1,0 +1,48 @@
+.status{
+    display: flex;
+    background-color: #F1F1F180;
+    width: 10%;
+    border-radius: 5px;
+    padding: 8px;
+    margin-top: 2%;
+    margin-left: 85%;
+    box-shadow: 6px 6px 6px #00000040;
+}
+
+.resignipt{
+    border: 1;
+    background-color: #F1F1F180;
+    border-radius: 5px;
+}
+
+.resignationdetails{
+    display: flex;
+    justify-content: space-around;
+}
+
+.rddetails{
+    margin: 1rem;
+}
+
+.resignationdetails1{
+    width: 40%;
+}
+
+.resignationdetails input{
+    width: 80%;
+    height: 1.5rem;
+    padding: .5rem;
+}
+
+.letter{
+    margin-left: 5%;
+    padding: 1rem;
+}
+
+.resignletter{
+    border: 1;
+    background-color: #F1F1F180;
+    border-radius: 5px;
+    width: 87.5%;
+    padding: 1rem;
+}

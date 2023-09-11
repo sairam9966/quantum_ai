@@ -1,8 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import JobCard from '../JobCard/JobCard'
+import axios from 'axios';
 
 export default function Jobs() {
-  const [flag,setFlag] = useState(false)
+  const [flag,setFlag] = useState(false);
+//   const [jobCards,setJobCards] = useState([])
+
+//   useEffect(()=>{
+//     const getJobCards = ()=>{
+//       axios.get(`http://localhost:5000/api/`).then((res)=>{
+//         console.log(res.data);
+//         setJobCards(res.data);
+//       })
+//     }
+//     getJobCards();
+//   },[])
   return (
     <div >
         <div className="topBar">
@@ -25,7 +37,6 @@ export default function Jobs() {
 
 
         </div>
-
         {flag?<CreateNewRole setFlag={setFlag}/>:null}
     </div>
   )

@@ -1,0 +1,22 @@
+*{
+    margin:0;
+    padding: 0;
+}
+
+.emdetails{
+    display: flex
+}
+
+.Employeedetails{
+    width: 30%;
+}
+
+.Empdetailstable{
+    width: 70%;
+    margin: -5%;
+}
+
+.Employeedetails p{
+    margin: 1rem;
+
+}

@@ -16,5 +16,5 @@ router
   .get(getJobById)
   .put(protect, admin, updateJob)
   .delete(protect, admin, deleteJob);
-router.route("/").get(getAllJobs).post(protect, admin, postNewJob);
+router.route("/").get(getAllJobs).post(postNewJob);
 export default router;

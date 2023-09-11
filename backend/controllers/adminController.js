@@ -88,10 +88,9 @@ const createEmployee = async (req, res) => {
       password,
       contact,
       start_date,
-      status,
       position,
       location,
-      emp_no,
+
       bank_name,
       acc_no,
       ifsc_code,
@@ -104,36 +103,48 @@ const createEmployee = async (req, res) => {
       health_insurance,
       proffesional_tax,
       tds,
+      amtinwords,
+      deduct,
+      gross,
+      netpay,
+      profileimg,
     } = req.body;
 
     const currentDate = new Date().toISOString().split("T")[0];
 
     const query = `
       INSERT INTO employees (
-        name,
-        age,
-        email,
-        password,
-        contact,
-        start_date,
-        status,
-        position,
-        location,
-        emp_no,
-        bank_name,
-        acc_no,
-        ifsc_code,
-        basic_salary,
-        hra,
-        conveniene_alloances,
-        medical_alloances,
-        special_alloances,
-        epf,
-        health_insurance,
-        proffesional_tax,
-        tds
+     
+      name,
+      age,
+      email,
+      password,
+      contact,
+      start_date,
+      position,
+      location,
+      
+      bank_name,
+      acc_no,
+      ifsc_code,
+      basic_salary,
+      hra,
+      conveniene_alloances,
+      medical_alloances,
+      special_alloances,
+      epf,
+      health_insurance,
+      proffesional_tax,
+      tds,
+      amtinwords,
+      deduct,
+      gross,
+      netpay,
+      profileimg,
+      status
+      
       )
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22,$23,$24,$25,$26)
       RETURNING *;
     `;
 
@@ -143,11 +154,10 @@ const createEmployee = async (req, res) => {
       email,
       password,
       contact,
-      start_date || currentDate,
-      status,
+      start_date,
       position,
       location,
-      emp_no,
+
       bank_name,
       acc_no,
       ifsc_code,
@@ -160,6 +170,12 @@ const createEmployee = async (req, res) => {
       health_insurance,
       proffesional_tax,
       tds,
+      amtinwords,
+      deduct,
+      gross,
+      netpay,
+      profileimg,
+      "active",
     ];
 
     const { rows } = await pool.query(query, values);
@@ -352,6 +368,32 @@ const makeAdminAsEmployee = async (req, res) => {
       .json({ error: "An error occurred while making the applicant an admin" });
   }
 };
+
+const getAllEmployees = async (req, res) => {
+  try {
+    const query = "SELECT * FROM employees";
+    const result = await pool.query(query);
+
+    return res.status(200).json(result.rows);
+  } catch (error) {
+    console.error("Error:", error);
+    return res
+      .status(500)
+      .json({ error: "An error occurred while fetching resignations" });
+  }
+};
+
+const getEmployeeById = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const query = "SELECT * FROM  employees where id=$1";
+    const value = [id];
+    const { rows } = await pool.query(query, value);
+    res.status(200).json(rows[0]);
+  } catch (error) {
+    res.status(500).json({ error: "An error occurred while fetching employee." });
+  }
+};
 const getAllResignationRequests = async (req, res) => {
   try {
     const query = "SELECT * FROM resignation";
@@ -413,4 +455,6 @@ export {
   getAllResignationRequests,
   acceptResignation,
   getResignationById,
+  getAllEmployees,
+  getEmployeeById
 };

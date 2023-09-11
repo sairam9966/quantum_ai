@@ -1,0 +1,29 @@
+.displayProfile{
+    width: 100px;
+    height: 100px;
+    padding-top: 2rem;
+}
+
+.profile{
+    text-align: center;
+    color: white;
+}
+
+.navMainContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.navOptions{
+    width: 80%;
+    margin: .5rem;
+    color: white;
+    border-radius: 8px;
+    padding: .5rem 1rem;
+    font-size: 1rem;
+}
+
+.nav{
+    margin-top: 30%;
+}

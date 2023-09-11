@@ -1,11 +1,10 @@
-import React from 'react'
+import React,{useState} from 'react'
 import './styles.css'
-
-export default function EmployeeCard() {
-    const name = 'kesava'
-    const position = 'web dev'
-    const Age = 19
-
+import { useNavigate } from 'react-router-dom';
+import Userdashboard from '../Userdashboard/Userdashboard';
+export default function EmployeeCard(props) {
+    const navigate=useNavigate();
+    const employee=props.employee;
   return (
     <div>
         <div className="card">
@@ -16,24 +15,26 @@ export default function EmployeeCard() {
                 <p style={{display:'flex',alignItems:"center"}}>
                     <p className='name'>Name</p>
                     <p >:</p>
-                    <p className='name'>{name}</p>
+                    <p className='name'>{employee.name}</p>
 
                 </p>
                 <p style={{display:'flex',alignItems:"center"}}>
                     <p className='name'>Position</p>
                     <p >:</p>
-                    <p className='name'>{position}</p>
+                    <p className='name'>{employee.position}</p>
 
                 </p>
                 <p style={{display:'flex',alignItems:"center"}}>
                     <p className='name'>Age</p>
                     <p >:</p>
-                    <p className='name'>{Age}</p>
+                    <p className='name'>{employee.age}</p>
 
                 </p>
             </div>
             <div >
-                <button className="infoButton" type='button'>Info</button>
+                <button className="infoButton" type='button' onClick={()=>{
+                    navigate(`/user/dashboard/${employee.id}`);
+                }}>Info</button>
             </div>
         </div>
     </div>

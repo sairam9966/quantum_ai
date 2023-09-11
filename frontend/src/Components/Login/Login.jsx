@@ -8,17 +8,22 @@ import axios from 'axios'
 export default function Login() {
   const [email,setEmail]  = useState()
   const [password,setPassword]  = useState()
-
+  const navigate = useNavigate()
 
   const handleLogin = () => {
-    axios.post("/api/employee/login",{email:email,password:password}).then((response) => {
-      console.log(response.data)
+    axios.post("http://localhost:5000/api/employee/login",{email:email,password:password}).then((response) => {
+      
+      const level=response.data.level;
+      const id=response.data._id;
+      if(level==1){
+      navigate(`/user/home/${id}`);
+      }
+      else{
+        navigate('/home');
+      }
     }).catch(err=>console.log(err))
   }  
 
-  
-
-  const navigate = useNavigate()
   return (
     <div >
       <div className='bgimage'  >
@@ -63,7 +68,7 @@ export default function Login() {
                   <br></br>
                   <button onClick={()=>{
                     handleLogin();
-                      navigate("/home",);
+                    // navigate("/home",);
                   }} className='submitBtn' type="button">Submit</button>
                 </div>
               </form>

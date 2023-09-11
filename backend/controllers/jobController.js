@@ -1,14 +1,23 @@
 import asyncHandler from "../middleware/asyncHandler.js";
 import { pool } from "../config/db.js";
+import { applicationSubmitionEmail } from "../utils/emailService.js";
 
 //@desc applyJob
 //route post /api/jobs/:id
 //@access public
 
 const applyJob = asyncHandler(async (req, res) => {
-  const { first_name, last_name, email, phone, resume_url, cover_letter } =
-    req.body;
+  const {
+    first_name,
+    last_name,
+    email,
+    phone_number,
+    resume_url,
+    cover_letter,
+    gender,
+  } = req.body;
   let job_id = req.params.id;
+  //handling ats score and jobdesc and inserting them also.
   try {
     const applicant = await pool.query(
       "SELECT * FROM applicants where email=$1 and job_id=$2",
@@ -19,8 +28,17 @@ const applyJob = asyncHandler(async (req, res) => {
       return res.status(401).json("You are already applied for this job");
     }
     pool.query(
-      "INSERT INTO applicants (first_name, last_name,email,phone_number,resume_url,cover_letter,job_id) VALUES ($1, $2,$3,$4,$5,$6,$7) RETURNING *",
-      [first_name, last_name, email, phone, resume_url, cover_letter, job_id],
+      "INSERT INTO applicants (first_name, last_name,email,phone_number,resume_url,cover_letter,gender,job_id) VALUES ($1, $2,$3,$4,$5,$6,$7,$8) RETURNING *",
+      [
+        first_name,
+        last_name,
+        email,
+        phone_number,
+        resume_url,
+        cover_letter,
+        gender,
+        job_id,
+      ],
       (error, results) => {
         if (error) {
           console.error("Error inserting data into the database", error);
@@ -28,7 +46,7 @@ const applyJob = asyncHandler(async (req, res) => {
             .status(500)
             .json({ message: "Error inserting data into the database." });
         }
-
+        applicationSubmitionEmail(email, first_name + " " + last_name);
         res.status(200).json({
           _id: results.rows[0].id,
           name: results.rows[0].first_name,
@@ -99,6 +117,8 @@ const postNewJob = async (req, res) => {
       approved_by,
       posting_date,
       expiration_date,
+      dept,
+      setapartwith,
     } = req.body;
 
     const query = `
@@ -114,9 +134,11 @@ const postNewJob = async (req, res) => {
         reviewed_by,
         approved_by,
         posting_date,
-        expiration_date
+        expiration_date,
+        dept,
+        setapartwith
       )
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12,$13,$14)
       RETURNING *;
     `;
 
@@ -133,6 +155,8 @@ const postNewJob = async (req, res) => {
       approved_by,
       posting_date,
       expiration_date,
+      dept,
+      setapartwith,
     ];
 
     const { rows } = await pool.query(query, values);

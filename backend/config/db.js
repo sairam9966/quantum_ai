@@ -12,6 +12,14 @@ const pool = new Pool({
   port: 5432,
 });
 
+// const pool = new Pool({
+//   user: "postgres", // Replace with your AWS database username
+//   host: "qa.cmvaowe6n6dg.us-east-1.rds.amazonaws.com",
+//   port: 5432, // Ensure this matches your ds.amazonaws.com", // Replace with your AWS instance hostname or IP
+//   database: "quantumai", // Replace with the name of your AWS database
+//   password: process.env.DB_PASSWORD, // ReAWS instance's PostgreSQL port
+// });
+
 const connectDB = async () => {
   try {
     const client = await pool.connect();
