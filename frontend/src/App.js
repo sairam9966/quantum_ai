@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Login from "./Components/Login/Login";
 import Home from "./Components/Home/Home";
-
+import PdfPage from "./Components/PdfPage/PdfPage";
 import axios from "axios";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CareersPortal from "./Components/CareersPortal/CareersPortal";
@@ -23,8 +23,10 @@ export default function App() {
         <Route path='/careers' Component={CareersPortal} />
         <Route path='/jobdescription/:id' Component={JobDescription} />
         <Route path='/jobs' Component={JobPosting} />
+        <Route path='/pdf-page' component={PdfPage} />
+
         <Route path='/createEmployee' Component={NewEmployee} />
-        <Route path='/applications' Component={ApplicationDetails} />
+        <Route path='/applications/:id' Component={ApplicationDetails} />
       </Routes>
     </BrowserRouter>
   );

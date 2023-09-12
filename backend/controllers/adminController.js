@@ -391,12 +391,14 @@ const getEmployeeById = async (req, res) => {
     const { rows } = await pool.query(query, value);
     res.status(200).json(rows[0]);
   } catch (error) {
-    res.status(500).json({ error: "An error occurred while fetching employee." });
+    res
+      .status(500)
+      .json({ error: "An error occurred while fetching employee." });
   }
 };
 const getAllResignationRequests = async (req, res) => {
   try {
-    const query = "SELECT * FROM resignation";
+    const query = "SELECT * FROM resignation where status='false'";
     const result = await pool.query(query);
 
     return res.status(200).json(result.rows);
@@ -456,5 +458,5 @@ export {
   acceptResignation,
   getResignationById,
   getAllEmployees,
-  getEmployeeById
+  getEmployeeById,
 };

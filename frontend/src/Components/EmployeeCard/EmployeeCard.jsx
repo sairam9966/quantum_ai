@@ -32,9 +32,7 @@ export default function EmployeeCard(props) {
                 </p>
             </div>
             <div >
-                <button className="infoButton" type='button' onClick={()=>{
-                    navigate(`/user/dashboard/${employee.id}`);
-                }}>Info</button>
+                <button className="infoButton" type='button' >Info</button>
             </div>
         </div>
     </div>

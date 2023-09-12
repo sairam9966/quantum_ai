@@ -1,8 +1,13 @@
 import React from 'react'
+
+
+import {Link} from 'react-router-dom'
  import verify from '../../Assets/check-mark.png'
 import './styles.css'
+import Pdf from "../../Assets/2.pdf"
 
-export default function Usercertificate() {
+export default function Usercertificate(props) {
+    const emp=props.emp;
     return (
         <>
             <div style={{height:"20vh"}}>
@@ -18,25 +23,31 @@ export default function Usercertificate() {
                 <p style={{ fontSize: "1.5rem", fontWeight: "600", paddingLeft: "1rem" }}>Resignation Request</p>
             </div>
 
-            <div style={{height:"50vh", display:"flex", justifyContent:'center'}}>
+            <div style={{height:"30vh", display:"flex", justifyContent:'center', paddingBottom:'20px'}}>
                 <div className="certificate">
                     <div className='certificatedetails'>
-                        <p>Name :</p>
-                        <p>Starting Date : </p>
-                        <p>Ending Date : </p>
-                        <p>No. of projects : </p>
+                        <p>Name : {emp.name}</p>
+                        <p>Starting Date :10-10-2010 </p>
+                        <p>Ending Date : 11-09-2023</p>
+                        
                     </div>
-                    <div style={{display:'flex', fontSize:".8rem", marginBottom:"6px", justifyContent:"center", height:"10%"}}>
-                        <p>Manager Signature</p>
+                    {/* <div style={{display:'flex', fontSize:".8rem", paddingBottom:"20px", justifyContent:"center", height:"10%"}}>
+                        <p>Manager Signature </p>
                         <p>TeamLead Signature</p>
                         <p>Employee Signature</p>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 
             <div className="downloadlink">
-                <a href='#' style={{color:"#215776DB", textDecoration:'none', borderBottom:"1px solid", margin:"2rem"}}>Download your certificate here</a>
-            </div>
+        {/* <Link
+          to="/pdf-page" // This should match the route path you set in your routing configuration
+          style={{ color: "#215776DB", textDecoration: 'none', borderBottom: "1px solid", margin: "2rem" }}
+        >
+          Download your certificate here
+        </Link> */}
+        <a href={Pdf} style={{width:"100vw",height:"100vh",marginLeft:"45%"}}>View certificate</a>
+      </div>
         </>
     )
 }

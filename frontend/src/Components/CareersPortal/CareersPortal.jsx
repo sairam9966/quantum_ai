@@ -4,7 +4,9 @@ import CareersJobCard from '../CareersJobCard/CareersJobCard'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 
+
 export default function CareersPortal() {
+    const navigate=useNavigate();
     const [jobs,setJobs] = useState([])
     useEffect(()=>{
         const getJobs = ()=>{

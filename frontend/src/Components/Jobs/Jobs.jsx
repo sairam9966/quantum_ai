@@ -1,20 +1,22 @@
 import React, { useState,useEffect } from 'react'
 import JobCard from '../JobCard/JobCard'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function Jobs() {
+const navigate=useNavigate();
   const [flag,setFlag] = useState(false);
-//   const [jobCards,setJobCards] = useState([])
+  const [jobs,setAllJobs] = useState([])
 
-//   useEffect(()=>{
-//     const getJobCards = ()=>{
-//       axios.get(`http://localhost:5000/api/`).then((res)=>{
-//         console.log(res.data);
-//         setJobCards(res.data);
-//       })
-//     }
-//     getJobCards();
-//   },[])
+  useEffect(()=>{
+    const getAllJobs = ()=>{
+      axios.get(`http://localhost:5000/api/jobs`).then((res)=>{
+        console.log(res.data);
+        setAllJobs(res.data);
+      })
+    }
+    getAllJobs();
+  },[])
   return (
     <div >
         <div className="topBar">
@@ -23,18 +25,25 @@ export default function Jobs() {
                 <button type='button'></button>
             </div>
             <div className="addNewItem">
-                <button onClick={()=>setFlag(true)} className='button' type='button'>New Role </button>
+                <button onClick={()=>navigate('/jobs')} className='button' type='button'>New Role </button>
             </div>
         </div>
         <div style={{display:"flex",flexWrap:"wrap",justifyContent:"center"}}>
+          {/* <JobCard/>
           <JobCard/>
           <JobCard/>
           <JobCard/>
           <JobCard/>
           <JobCard/>
-          <JobCard/>
-          <JobCard/>
+          <JobCard/> */}
+          {
+          jobs?.map((job)=>{
+            return(
+              <JobCard  job={job}/>
+            )
 
+          })
+        }
 
         </div>
         {flag?<CreateNewRole setFlag={setFlag}/>:null}
@@ -47,7 +56,6 @@ const CreateNewRole = (props) => {
           <div style={{ width: "30vw", height: "60vh", backgroundColor: "rgba(255,255,255,1)", padding: "2rem",  boxShadow: "10px 10px 10px rgba(0,0,0,0.5)",overflowX:"hidden" }}>
               <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"0 10"}}>
               <p style={{ width: "100%", color: "black",fontWeight:"800",fontSize:30 }}>Fill in the New Role</p>
-
 
               <p onClick={() => props.setFlag(false)} style={{ width: "100%", textAlign: "right", color: "black",cursor:"pointer" }}>Close</p>
               </div>

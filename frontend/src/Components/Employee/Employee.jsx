@@ -38,8 +38,6 @@ const [allEmployee,setAllEmployee]=useState([]);
           })
         }
 
-          
-
         </div>
     </div>
   )

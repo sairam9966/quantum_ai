@@ -18,7 +18,7 @@ export default function UserHome() {
       </div>
       <div className='contentContainer'>
         {
-          x===1? <Userdashboard setName={setName} setEmp={setEmp}/>: x===2?<Userresignation emp={emp}/>: x===3? <Usercertificate/>: <Userdashboard/>
+          x===1? <Userdashboard setName={setName} setEmp={setEmp}/>: x===2?<Userresignation emp={emp}/>: x===3? <Usercertificate emp={emp}/>: <Userdashboard/>
         }
         
       </div>

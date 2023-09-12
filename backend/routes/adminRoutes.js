@@ -17,9 +17,9 @@ import {
 } from "../controllers/adminController.js";
 import { protect, admin } from "../middleware/authorize.js";
 const router = express.Router();
-router.route("/applicants").get(protect, admin, getAllApplicants);
+router.route("/applicants").get(getAllApplicants);
 router.route("/applicants/by-job/:job_id").get(getApplicantsByJobId);
-router.route("/applicants/:id").get(protect, admin, getApplicantsById);
+router.route("/applicants/:id").get(getApplicantsById);
 router
   .route("/applicants/:id/job/:job_id")
   .get(protect, admin, getApplicantByApplicantAndJob);
