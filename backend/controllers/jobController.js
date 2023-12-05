@@ -1,12 +1,116 @@
+// import asyncHandler from "../middleware/asyncHandler.js";
+// import { pool } from "../config/db.js";
+// import { applicationSubmitionEmail } from "../utils/emailService.js";
+// import axios from "axios";
+// //@desc applyJob
+// //route post /api/jobs/:id
+// //@access public
+
+// const applyJob = asyncHandler(async (req, res) => {
+//   console.log(req.body);
+//   const {
+//     first_name,
+//     last_name,
+//     email,
+//     phone_number,
+//     resume_url,
+//     cover_letter,
+//     gender,
+//   } = req.body;
+//   let job_id = req.params.id;
+
+//   const { rows } = await pool.query(
+//     "SELECT job_description FROM jobs where id=$1",
+//     [job_id]
+//   );
+
+//   const jobdsc = rows[0].job_description;
+//   const resume = String(resume_url);
+
+//   let data = JSON.stringify({
+//     resumeurl: resume,
+//     jobdesc: jobdsc,
+//   });
+
+//   let config = {
+//     method: "get",
+//     maxBodyLength: Infinity,
+//     url: "http://127.0.0.1:8000/get_resume_and_job_description",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     data: data,
+//   };
+
+//   axios
+//     .request(config)
+//     .then(response => {
+//       const responseData = response.data;
+//       const finalSummaryObject = responseData.find(
+//         item => item.field === "Final Summary"
+//       );
+//       const ats = finalSummaryObject.ats_score;
+//       const resume_desc = finalSummaryObject.summary;
+//     })
+//     .catch(error => {
+//       console.log(error);
+//     });
+
+//   try {
+//     const applicant = await pool.query(
+//       "SELECT * FROM applicants where email=$1 and job_id=$2",
+//       [email, job_id]
+//     );
+
+//     if (applicant.rows.length > 0) {
+//       return res.status(401).json("You are already applied for this job");
+//     }
+//     pool.query(
+//       "INSERT INTO applicants (first_name, last_name,email,phone_number,resume_url,cover_letter,gender,job_id) VALUES ($1, $2,$3,$4,$5,$6,$7,$8) RETURNING *",
+//       [
+//         first_name,
+//         last_name,
+//         email,
+//         phone_number,
+//         resume_url,
+//         cover_letter,
+//         gender,
+//         job_id,
+//       ],
+//       (error, results) => {
+//         if (error) {
+//           console.error("Error inserting data into the database", error);
+//           return res
+//             .status(500)
+//             .json({ message: "Error inserting data into the database." });
+//         }
+//         applicationSubmitionEmail(email, first_name + " " + last_name);
+//         res.status(200).json({
+//           _id: results.rows[0].id,
+//           name: results.rows[0].first_name,
+//           email: results.rows[0].email,
+//         });
+//       }
+//     );
+//   } catch (error) {
+//     res
+//       .status(500)
+//       .json({ message: "Error inserting data into the applicants." });
+//   }
+// });
+
+//adding
 import asyncHandler from "../middleware/asyncHandler.js";
 import { pool } from "../config/db.js";
 import { applicationSubmitionEmail } from "../utils/emailService.js";
+import axios from "axios";
 
 //@desc applyJob
 //route post /api/jobs/:id
 //@access public
 
 const applyJob = asyncHandler(async (req, res) => {
+  console.log(req.body);
   const {
     first_name,
     last_name,
@@ -17,50 +121,94 @@ const applyJob = asyncHandler(async (req, res) => {
     gender,
   } = req.body;
   let job_id = req.params.id;
-  //handling ats score and jobdesc and inserting them also.
+
   try {
-    const applicant = await pool.query(
-      "SELECT * FROM applicants where email=$1 and job_id=$2",
-      [email, job_id]
+    const { rows } = await pool.query(
+      "SELECT job_description FROM jobs where id=$1",
+      [job_id]
     );
 
-    if (applicant.rows.length > 0) {
-      return res.status(401).json("You are already applied for this job");
-    }
-    pool.query(
-      "INSERT INTO applicants (first_name, last_name,email,phone_number,resume_url,cover_letter,gender,job_id) VALUES ($1, $2,$3,$4,$5,$6,$7,$8) RETURNING *",
-      [
-        first_name,
-        last_name,
-        email,
-        phone_number,
-        resume_url,
-        cover_letter,
-        gender,
-        job_id,
-      ],
-      (error, results) => {
-        if (error) {
-          console.error("Error inserting data into the database", error);
-          return res
-            .status(500)
-            .json({ message: "Error inserting data into the database." });
+    const jobdsc = rows[0].job_description;
+    const resume = String(resume_url);
+
+    let data = JSON.stringify({
+      resumeurl: resume,
+      jobdesc: jobdsc,
+    });
+
+    let config = {
+      method: "get",
+      maxBodyLength: Infinity,
+      url: "http://127.0.0.1:8000/get_resume_and_job_description",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    axios
+      .request(config)
+      .then(async response => {
+        const responseData = response.data;
+        const finalSummaryObject = responseData.find(
+          item => item.field === "Final Summary"
+        );
+
+        if (!finalSummaryObject) {
+          return res.status(404).json({
+            message: "Final Summary not found in the response.",
+          });
         }
-        applicationSubmitionEmail(email, first_name + " " + last_name);
+
+        const ats = finalSummaryObject.ats_score;
+        const resume_desc = finalSummaryObject.summary;
+
+        const applicant = await pool.query(
+          "SELECT * FROM applicants where email=$1 and job_id=$2",
+          [email, job_id]
+        );
+
+        if (applicant.rows.length > 0) {
+          return res.status(401).json("You are already applied for this job");
+        }
+
+        const results = await pool.query(
+          "INSERT INTO applicants (first_name, last_name, email, phone_number, resume_url, cover_letter, gender, job_id,ats,resume_desc) VALUES ($1, $2, $3, $4, $5, $6, $7, $8,$9,$10) RETURNING *",
+          [
+            first_name,
+            last_name,
+            email,
+            phone_number,
+            resume_url,
+            cover_letter,
+            gender,
+            job_id,
+            ats,
+            resume_desc,
+          ]
+        );
+
+        applicationSubmitionEmail(email, `${first_name} ${last_name}`);
+
         res.status(200).json({
           _id: results.rows[0].id,
           name: results.rows[0].first_name,
           email: results.rows[0].email,
         });
-      }
-    );
+      })
+      .catch(error => {
+        console.log(error);
+        res.status(500).json({ message: "Error with the Axios request." });
+      });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Error inserting data into the applicants." });
+    console.error("Error in applyJob:", error);
+    res.status(500).json({ message: "Internal Server Error." });
   }
 });
 
+export default applyJob;
+
+//ending
 //@desc get all jobs
 //@route GET  /api/jobs
 //@access Public

@@ -72,7 +72,7 @@ const JobForm = (props) => {
       last_name:'',
       email:'',
       phone_number:'',
-      resume_url:'https://resume',
+      resume_url:'',
       cover_letter:'',
       gender:''
     })
@@ -83,17 +83,75 @@ const JobForm = (props) => {
           [name]: value,
         });
       };
-      const dataSubmit = (e) => {
-        e.preventDefault()
-      
-        //pushing  resume into the cloudiunary/aws and get the link 
-          const newApplicant = ()=>{
-            axios.post(`http://localhost:5000/api/jobs/apply/${id}`,formData).then((res)=>{
-              navigate('/careers');
-            })
-          }
-          newApplicant();
+      function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min;
       }
+      // const resumeHandler = () => {
+      //   const fileInput = document.getElementById('resume_url');
+      //   if (fileInput.files.length > 0) {
+      //     const file = fileInput.files[0];
+      //     const formdata = new FormData();
+      //   const rannum = getRandomInt(1, 10000000);
+      //     const fileName = `${rannum}.pdf`;
+      //     formdata.append('pdf_file', file , fileName);
+      //     axios.post(`http://localhost:5000/api/upload-resume`, formdata, {
+      //       headers: {
+      //         'Content-Type': 'multipart/form-data',
+      //       },
+      //     })
+      //     .then((response) => {
+            
+      //       console.log('File uploaded successfully');
+            
+      //     })
+      //     .catch((error) => {
+      //       console.error('Error uploading file:', error);
+      //     });
+      //   } else {
+      //     console.error('No resume file selected for upload');
+      //   }
+      // };
+      
+      
+  
+      const dataSubmit = (e) => {
+        e.preventDefault();
+        const fileInput = document.getElementById('resume_url');
+        if (fileInput.files.length > 0) {
+          const file = fileInput.files[0];
+          const formdata = new FormData();
+        const rannum = getRandomInt(1, 10000000);
+          const fileName = `${rannum}.pdf`;
+          formData.resume_url=fileName;
+          formdata.append('pdf_file', file , fileName);
+          axios.post(`http://localhost:5000/api/upload-resume`, formdata, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          })
+          .then((response) => {
+            
+            console.log('File uploaded successfully');
+            
+          })
+          .catch((error) => {
+            console.error('Error uploading file:', error);
+          });
+        } else {
+          console.error('No resume file selected for upload');
+        }
+        const newApplicant = ()=>{
+          axios.post(`http://localhost:5000/api/jobs/apply/${id}`,formData).then((res)=>{
+            navigate('/careers');
+          })
+        }
+        newApplicant();
+        navigate('/careers');
+      };
+      
+
     return (
         <div style={{ position: "absolute", top: 0, left: 0, width: "100vw", height: "100vh", backgroundColor: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <div style={{ width: "40vw", height: "80vh", backgroundColor: "rgba(255,255,255,1)", padding: "2rem",  boxShadow: "10px 10px 10px rgba(0,0,0,0.5)",overflowX:"hidden" }}>
@@ -122,7 +180,7 @@ const JobForm = (props) => {
                     </div>
                     <div style={{ marginTop: 10 }}>
                         <label style={{}} htmlFor="firstname">Upload your Resume</label><br />
-                        <input style={{ marginTop: 10, width: "90%", backgroundColor: "lightgrey", padding: ".5rem", color: "black" }} type="file" id='Resume' name='resume_url' onChange={inputHandler}  />
+                        <input style={{ marginTop: 10, width: "90%", backgroundColor: "lightgrey", padding: ".5rem", color: "black" }} type="file" id='resume_url' name='resume_url' onChange={inputHandler}  />
                     </div>
                     <div style={{ marginTop: 10 }}>
                         <label style={{}} htmlFor="coverletter">Cover Letter</label><br />

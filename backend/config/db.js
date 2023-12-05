@@ -7,6 +7,8 @@ dotenv.config();
 const pool = new Pool({
   user: "postgres",
   host: "localhost",
+  // database: "project_labai",
+  // password: "akhil123",
   database: "quantum_ai",
   password: process.env.DB_PASSWORD,
   port: 5432,
